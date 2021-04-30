@@ -62,7 +62,7 @@ while dayCondition:
         stock_historical[['Close', '21', '55', '150']].plot()
         plt.savefig(path+str(stock)+'.png')
     
-    def TradingStrategie(stock,start,interval):   
+    def TradingStrategy(stock,start,interval):   
         df = yf.download(stock, start=start, interval=interval, threads=False)   
         df['MA21']=df['Adj Close'].rolling(window=21).mean()
         df['MA55']=df['Adj Close'].rolling(window=55).mean()
@@ -117,7 +117,7 @@ while dayCondition:
         try:        
             stock=tickers[i]    
             print(stock)    
-            signal=TradingStrategie(stock,start,interval)['Signal']
+            signal=TradingStrategy(stock,start,interval)['Signal']
             if (signal[len(signal)-1])!=(signal[len(signal)-2]):
                 if (signal[len(signal)-1]=='Buy') & (signal[len(signal)-2]=='Sell'):
                     Chart(stock,start,interval)
